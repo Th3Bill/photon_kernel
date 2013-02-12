@@ -541,6 +541,7 @@ static struct i2c_board_info tegra_i2c_bus3_board_info[] = {
 };
 
 #if 1
+extern void bluesleep_setup_uart_port(struct platform_device *uart_dev);
 static noinline void __init tegra_setup_bluesleep(void)
 {
        struct platform_device *pDev = NULL;
@@ -582,6 +583,8 @@ static noinline void __init tegra_setup_bluesleep(void)
                pr_err("unable to add bluesleep device\n");
                goto fail;
        }
+
+       bluesleep_setup_uart_port(&tegra_uart[2]);
 
 fail:
        if (pDev)
